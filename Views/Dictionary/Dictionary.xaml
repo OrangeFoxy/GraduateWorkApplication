@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:GraduateWorkApplication.Views.Dictionary">
+
+    <x:Static x:Key="ButtonAddString" Member="local:Constants.ButtonAddString"/>
+    <x:Static x:Key="ButtonEditString" Member="local:Constants.ButtonEditString"/>
+    <x:Static x:Key="ButtonDeleteString" Member="local:Constants.ButtonDeleteString"/>
+
+    <x:Static x:Key="ButtonCancelString" Member="local:Constants.ButtonCancelString"/>
+    <x:Static x:Key="ButtonBackString" Member="local:Constants.ButtonBackString"/>
+
+    <x:Static x:Key="HeaderUpdateInfo" Member="local:Constants.HeaderUpdateInfo"/>
+    <x:Static x:Key="HeaderSpecialtyString" Member="local:Constants.HeaderSpecialtyString"/>
+
+    <x:Static x:Key="CheckBoxAdvSearchString" Member="local:Constants.CheckBoxAdvSearchString"/>
+    <x:Static x:Key="CheckBoxAllEnrolleesString" Member="local:Constants.CheckBoxAllEnrolleesString"/>
+
+    <x:Static x:Key="PhoneMask" Member="local:Constants.PhoneMask"/>
+    <x:Static x:Key="InsurancePolicyMask" Member="local:Constants.InsurancePolicyMask" />
+    <x:Static x:Key="YearOfIssueMask" Member="local:Constants.YearOfIssueMask"/>
+    <x:Static x:Key="AverageScoreMask" Member="local:Constants.AverageScoreMask"/>
+    <x:Static x:Key="DateMask" Member="local:Constants.DateMask"/>
+
+    <!--Персональные данные-->
+    <x:Static x:Key="HeaderNameString" Member="local:Constants.HeaderNameString"/>
+    <x:Static x:Key="HeaderDateString" Member="local:Constants.HeaderDateString"/>
+    <x:Static x:Key="HeaderAddressString" Member="local:Constants.HeaderAddressString"/>
+    <x:Static x:Key="HeaderPhoneString" Member="local:Constants.HeaderPhoneString"/>
+    <x:Static x:Key="HeaderPassportString" Member="local:Constants.HeaderPassportString"/>
+    <x:Static x:Key="HeaderTaxpayerNumberString" Member="local:Constants.HeaderTaxpayerNumberString"/>
+    <x:Static x:Key="HeaderInsurancePolicyString" Member="local:Constants.HeaderInsurancePolicyString"/>
+    <x:Static x:Key="HeaderMedicalPolicyString" Member="local:Constants.HeaderMedicalPolicyString"/>
+
+    <!--Колледж-->
+    <x:Static x:Key="HeaderStatementString" Member="local:Constants.HeaderStatementString"/>
+    <x:Static x:Key="HeaderBudgetString" Member="local:Constants.HeaderBudgetString"/>
+    <x:Static x:Key="HeaderHomeString" Member="local:Constants.HeaderHomeString"/>
+    <x:Static x:Key="HeaderPrivilegeString" Member="local:Constants.HeaderPrivilegeString"/>
+    <x:Static x:Key="HeaderGroupString" Member="local:Constants.HeaderGroupString"/>
+
+    <!--Школа-->
+    <x:Static x:Key="HeaderCertificateString" Member="local:Constants.HeaderCertificateString"/>
+    <x:Static x:Key="HeaderAverageScoreString" Member="local:Constants.HeaderAverageScoreString"/>
+    <x:Static x:Key="HeaderSchoolString" Member="local:Constants.HeaderSchoolString"/>
+    <x:Static x:Key="HeaderYearOfIssueString" Member="local:Constants.HeaderYearOfIssueString"/>
+
+    <x:Static x:Key="SwitchBudgetString" Member="local:Constants.SwitchBudgetString"/>
+    <x:Static x:Key="SwitchHomeString" Member="local:Constants.SwitchHomeString"/>
+
+</ResourceDictionary>

@@ -1,0 +1,225 @@
+﻿<Window x:Class="GraduateWorkApplication.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraduateWorkApplication"
+        xmlns:vm="clr-namespace:GraduateWorkApplication.ViewModels"
+        xmlns:vc="clr-namespace:GraduateWorkApplication.Views.Controls"
+        xmlns:dict="clr-namespace:GraduateWorkApplication.Views.Dictionary"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="450" MinWidth="800" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Views/Styles/DataTriggers.xaml"/>
+                <ResourceDictionary Source="/Views/Dictionary/Dictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid Style="{StaticResource BlockGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="58"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Menu Grid.Row="0" Grid.ColumnSpan="3">
+                <MenuItem>
+                    <MenuItem.Header>Файл</MenuItem.Header>
+                </MenuItem>
+            </Menu>
+
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center">
+                <ui:AppBarButton Icon="Add"
+                                 Label="{StaticResource ButtonAddString}"
+                                 Command="{Binding ShowAddPopupGroupCommand}"/>
+                <ui:AppBarButton Icon="Edit"
+                                 Label="{StaticResource ButtonEditString}"
+                                 Command="{Binding ShowEditPopupGroupCommand}"/>
+                <ui:AppBarButton Icon="Delete"
+                                 Label="{StaticResource ButtonDeleteString}"
+                                 Command="{Binding ShowRemovePopupGroupCommand}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center">
+                <ui:AppBarButton Icon="Add"
+                                 Label="{StaticResource ButtonAddString}"
+                                 Command="{Binding ShowAddPopupEnrolleeCommand}"/>
+                <ui:AppBarButton Icon="Edit"
+                                 Label="{StaticResource ButtonEditString}"
+                                 Command="{Binding ShowEditPopupEnrolleeCommand}"/>
+                <ui:AppBarButton Icon="Delete"
+                                 Label="{StaticResource ButtonDeleteString}"
+                                 Command="{Binding ShowRemovePopupEnrolleeCommand}"/>
+            </StackPanel>
+
+            <ListBox Grid.Row="2"
+                     ItemsSource="{Binding Groups}"
+                     SelectedItem="{Binding SelectedGroup}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ShortName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!--Таблица-->
+            <vc:DataTable Grid.Row="2" Grid.Column="1"/>
+
+            <!--Поиск-->
+            <Grid Grid.Row="1"
+                  Grid.Column="2">
+                <CheckBox IsChecked="{Binding AdvSearch}" Content="{StaticResource CheckBoxAdvSearchString}" x:Name="AdvSearchCheckBox"/>
+
+            </Grid>
+
+            <ScrollViewer Grid.Row="2"
+                          Grid.Column="2">
+                <StackPanel Grid.Row="0"
+                            Margin="20 10">
+                    <StackPanel.Resources>
+                        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+                    </StackPanel.Resources>
+                    <CheckBox Content="{StaticResource CheckBoxAllEnrolleesString}"
+                              IsChecked="{Binding AllEnrollees}" />
+                    <TextBox ui:ControlHelper.Header="{StaticResource HeaderNameString}"
+                             Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel Visibility="{Binding ElementName=AdvSearchCheckBox,
+                                                     Path=IsChecked,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <WrapPanel>
+                            <Grid Width="24px">
+                                <CheckBox IsChecked="{Binding BudgetEnabled}"/>
+                            </Grid>
+                            <CheckBox Content="{StaticResource HeaderBudgetString}"
+                                      IsChecked="{Binding Budget, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding BudgetEnabled}"/>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Grid Width="24px">
+                                <CheckBox IsChecked="{Binding StatementEnabled}" />
+                            </Grid>
+                            <CheckBox Content="{StaticResource HeaderStatementString}"
+                                      IsChecked="{Binding Statement, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding StatementEnabled}"/>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Grid Width="24px">
+                                <CheckBox IsChecked="{Binding HomeEnabled}" />
+                            </Grid>
+                            <CheckBox Content="{StaticResource HeaderHomeString}"
+                                      IsChecked="{Binding Home, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding HomeEnabled}"/>
+                        </WrapPanel>
+                        <TextBox ui:ControlHelper.Header="{StaticResource HeaderAddressString}"
+                                 Text="{Binding SearchAddress, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox ui:ControlHelper.Header="{StaticResource HeaderPassportString}"
+                                 Text="{Binding SearchPassport, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox ui:ControlHelper.Header="{StaticResource HeaderPrivilegeString}"
+                                 Text="{Binding SearchPrivilege, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox ui:ControlHelper.Header="{StaticResource HeaderCertificateString}"
+                                 Text="{Binding SearchCert, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox ui:ControlHelper.Header="{StaticResource HeaderSchoolString}"
+                                 Text="{Binding SearchSchool, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+
+        <!--Работа с абитуриентами-->
+        <!--Добавление-->
+        <vc:EnrolleeViewControl Style="{StaticResource AddEnrollee}">
+            <DockPanel HorizontalAlignment="Stretch"
+                       Margin="20 0">
+                <Button DockPanel.Dock="Right"
+                        Command="{Binding ShowMainWindow}"
+                        Content="{StaticResource ButtonCancelString}" />
+                <Button DockPanel.Dock="Left"
+                        Command="{Binding ClickAddEnrolleeCommand}"
+                        Content="{StaticResource ButtonAddString}" />
+            </DockPanel>
+        </vc:EnrolleeViewControl>
+        <!--Изменение-->
+        <vc:EnrolleeViewControl Style="{StaticResource EditEnrollee}">
+            <DockPanel HorizontalAlignment="Stretch"
+                       Margin="20 0">
+                <TextBlock VerticalAlignment="Center"
+                           DockPanel.Dock="Right"
+                           Text="{StaticResource HeaderUpdateInfo}"
+                           FontSize="12" />
+                <Button DockPanel.Dock="Left"
+                        Command="{Binding ShowMainWindow}"
+                        Content="{StaticResource ButtonBackString}" />
+            </DockPanel>
+        </vc:EnrolleeViewControl>
+
+        <!--Работа с группами-->
+        <!--Добавление-->
+        <vc:GroupViewControl Style="{StaticResource AddGroup}">
+            <DockPanel HorizontalAlignment="Stretch"
+                       Margin="20 0">
+                <Button DockPanel.Dock="Right"
+                        Command="{Binding ShowMainWindow}"
+                        Content="{StaticResource ButtonCancelString}" />
+                <Button DockPanel.Dock="Left"
+                        Command="{Binding ClickAddGroupCommand}"
+                        Content="{StaticResource ButtonAddString}" />
+            </DockPanel>
+        </vc:GroupViewControl>
+        <!--Изменение-->
+        <vc:GroupViewControl Style="{StaticResource EditGroup}">
+            <DockPanel HorizontalAlignment="Stretch"
+                       Margin="20 0">
+                <TextBlock VerticalAlignment="Center"
+                           DockPanel.Dock="Right"
+                           Text="{StaticResource HeaderUpdateInfo}"
+                           FontSize="12" />
+                <Button DockPanel.Dock="Left"
+                        Command="{Binding ShowMainWindow}"
+                        Content="{StaticResource ButtonBackString}" />
+            </DockPanel>
+        </vc:GroupViewControl>
+
+        <!--Уведомление об удалении-->
+        <vc:MessagePopupControl Style="{StaticResource RemovePopup}">
+            <DockPanel HorizontalAlignment="Stretch"
+                       Margin="20 0">
+                <Button DockPanel.Dock="Right"
+                        Command="{Binding ShowMainWindow}"
+                        Content="{StaticResource ButtonCancelString}" />
+                <Button DockPanel.Dock="Left"
+                        Command="{Binding ClickRemoveCommand}"
+                        Content="{StaticResource ButtonDeleteString}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}">
+                            <Setter Property="Background" Value="Red" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </DockPanel>
+        </vc:MessagePopupControl>
+    </Grid>
+</Window>

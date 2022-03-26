@@ -1,0 +1,216 @@
+﻿<UserControl x:Class="GraduateWorkApplication.Views.Controls.DataTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GraduateWorkApplication.Views.Controls"
+             xmlns:conv="clr-namespace:GraduateWorkApplication.Views.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/Dictionary/Dictionary.xaml" />
+    </UserControl.Resources>
+    <DataGrid AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              SelectionMode="Single"
+              HeadersVisibility="Column"
+              VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled"
+              RowDetailsVisibilityMode="VisibleWhenSelected"
+              IsReadOnly="True"
+              EnableRowVirtualization="True"
+              ItemsSource="{Binding Enrollees}"
+              SelectedItem="{Binding SelectedEnrollee}">
+        <DataGrid.Columns>
+            <!--ФИО-->
+            <DataGridTextColumn Header="{StaticResource HeaderNameString}"
+                                Binding="{Binding Name}"
+                                MinWidth="10"
+                                Width="2*" />
+            <!--Средний балл-->
+            <DataGridTextColumn Header="{StaticResource HeaderAverageScoreString}"
+                                Binding="{Binding AverageScore, ConverterCulture='ru-RU', StringFormat='{}{0:0.00}'}"
+                                MinWidth="10"
+                                Width="0.8*"/>
+            <!--Эл. заявление-->
+            <DataGridCheckBoxColumn Header="{StaticResource HeaderStatementString}"
+                                    Binding="{Binding Statement}"
+                                    MinWidth="10"
+                                    Width="0.5*"/>
+            <!--Аттестат-->
+            <DataGridTextColumn Header="{StaticResource HeaderCertificateString}"
+                                Binding="{Binding Certificate}"
+                                MinWidth="10"
+                                Width="1.2*" />
+        </DataGrid.Columns>
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <StackPanel>
+                    <Grid Margin="25 15">
+                        <Grid.Resources>
+                            <Style x:Key="Headers"
+                                   TargetType="{x:Type TextBlock}"
+                                   BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="FontWeight"
+                                        Value="SemiBold" />
+                                <Setter Property="FontSize"
+                                        Value="13" />
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Right" />
+                                <Setter Property="Margin"
+                                        Value="0 0 10 0" />
+                            </Style>
+                            <Style x:Key="Data"
+                                   TargetType="{x:Type TextBlock}"
+                                   BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="FontSize"
+                                        Value="13" />
+                            </Style>
+                            <conv:BoolToStringConverter x:Key="BoolToStringConverter" />
+                        </Grid.Resources>
+                        <WrapPanel Orientation="Horizontal">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{StaticResource HeaderGroupString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="1"
+                                           Text="{StaticResource HeaderBudgetString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="2"
+                                           Text="{StaticResource HeaderHomeString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="3"
+                                           Text="{StaticResource HeaderDateString}"
+                                           Style="{StaticResource Headers}" />
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Path=Group.ShortName}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding Budget, ConverterParameter={StaticResource SwitchBudgetString}, Converter={StaticResource BoolToStringConverter}}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="1"
+                                           Text="{Binding Home, ConverterParameter={StaticResource SwitchHomeString}, Converter={StaticResource BoolToStringConverter}}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="3"
+                                           Grid.Column="1"
+                                           Text="{Binding Date, ConverterCulture='ru-Ru', StringFormat='dd/MM/yyyy'}"
+                                           Style="{StaticResource Data}" />
+                            </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{StaticResource HeaderPhoneString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="1"
+                                           Text="{StaticResource HeaderYearOfIssueString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="2"
+                                           Text="{StaticResource HeaderSchoolString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="3"
+                                           Text="{StaticResource HeaderPrivilegeString}"
+                                           Style="{StaticResource Headers}" />
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Phone}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding YearOfIssue}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="1"
+                                           Text="{Binding School}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="3"
+                                           Grid.Column="1"
+                                           Text="{Binding Privilege}"
+                                           Style="{StaticResource Data}" />
+                            </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{StaticResource HeaderTaxpayerNumberString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="1"
+                                           Text="{StaticResource HeaderInsurancePolicyString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="2"
+                                           Text="{StaticResource HeaderMedicalPolicyString}"
+                                           Style="{StaticResource Headers}" />
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding TaxpayerNumber}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding InsurancePolicy}"
+                                           Style="{StaticResource Data}" />
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="1"
+                                           Text="{Binding MedicalPolicy}"
+                                           Style="{StaticResource Data}" />
+                            </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition MinWidth="200" MaxWidth="600" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{StaticResource HeaderAddressString}"
+                                           Style="{StaticResource Headers}" />
+                                <TextBlock Grid.Row="1"
+                                           Text="{StaticResource HeaderPassportString}"
+                                           Style="{StaticResource Headers}" />
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Address}"
+                                           Style="{StaticResource Data}"
+                                           TextWrapping="Wrap" />
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding Passport}"
+                                           Style="{StaticResource Data}"
+                                           TextWrapping="Wrap" />
+                            </Grid>
+                        </WrapPanel>
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+    </DataGrid>
+</UserControl>

@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:GraduateWorkApplication.ViewModels"
+                    xmlns:vc="clr-namespace:GraduateWorkApplication.Views.Controls">
+    <!--Блокировка табуляции для переключения между элементами-->
+    <Style x:Key="BlockGrid" TargetType="Grid">
+        <Setter Property="IsEnabled" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=OP}" Value="{x:Static vm:OpenedPopup.Default}">
+                <Setter Property="IsEnabled" Value="True"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <!--Отображение всплывающих окон-->
+    <Style x:Key="AddEnrollee" TargetType="vc:EnrolleeViewControl">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=OP}" Value="{x:Static vm:OpenedPopup.AddEnrollee}">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="EditEnrollee" TargetType="vc:EnrolleeViewControl">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=OP}" Value="{x:Static vm:OpenedPopup.EditEnrollee}">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="AddGroup" TargetType="vc:GroupViewControl">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=OP}" Value="{x:Static vm:OpenedPopup.AddGroup}">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="EditGroup" TargetType="vc:GroupViewControl">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=OP}" Value="{x:Static vm:OpenedPopup.EditGroup}">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="RemovePopup" TargetType="vc:MessagePopupControl">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=OP}" Value="{x:Static vm:OpenedPopup.RemovePopup}">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
